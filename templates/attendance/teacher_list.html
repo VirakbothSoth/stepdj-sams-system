@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Teachers</h1>
+    <a href="{% url 'teacher_create' %}"
+        class="bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-indigo-800 transition">
+        + Add Teacher
+    </a>
+</div>
+
+<div class="bg-white rounded-xl shadow overflow-hidden">
+    <table class="w-full text-sm">
+        <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
+            <tr>
+                <th class="px-6 py-3 text-left">Name</th>
+                <th class="px-6 py-3 text-left">Email</th>
+                <th class="px-6 py-3 text-left">Age</th>
+                <th class="px-6 py-3 text-left">Salary</th>
+                <th class="px-6 py-3 text-left">Classroom</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% for teacher in teachers %}
+            <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 font-medium text-gray-800">{{ teacher.name }}</td>
+                <td class="px-6 py-4 text-gray-500">{{ teacher.email|default:"-" }}</td>
+                <td class="px-6 py-4 text-gray-500">{{ teacher.age|default:"-" }}</td>
+                <td class="px-6 py-4 text-gray-500">${{ teacher.salary }}</td>
+                <td class="px-6 py-4 text-gray-500">{{ teacher.classroom.name }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" class="px-6 py-8 text-center text-gray-400">No teachers found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

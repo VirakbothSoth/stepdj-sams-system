@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="max-w-lg mx-auto bg-white rounded-xl shadow p-8 mt-6">
+    <div class="flex justify-between items-start mb-6">
+        <h2 class="text-xl font-bold text-gray-800">{{ student.name }}</h2>
+        <a href="{% url 'student_list' %}" class="text-sm text-indigo-600 hover:underline">← Back</a>
+    </div>
+
+    <div class="space-y-4 text-sm">
+        <div class="flex justify-between border-b border-gray-100 pb-3">
+            <span class="text-gray-500">Email</span>
+            <span class="text-gray-800 font-medium">{{ student.email|default:"-" }}</span>
+        </div>
+        <div class="flex justify-between border-b border-gray-100 pb-3">
+            <span class="text-gray-500">Age</span>
+            <span class="text-gray-800 font-medium">{{ student.age|default:"-" }}</span>
+        </div>
+        <div class="flex justify-between border-b border-gray-100 pb-3">
+            <span class="text-gray-500">Classroom</span>
+            <span class="text-gray-800 font-medium">{{ student.classroom.name }}</span>
+        </div>
+        <div class="flex justify-between pb-3">
+            <span class="text-gray-500">Enrolled</span>
+            <span class="text-gray-800 font-medium">{{ student.created_at|date:"M d, Y" }}</span>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

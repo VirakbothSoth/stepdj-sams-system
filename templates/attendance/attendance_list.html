@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="flex justify-between items-center mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">Attendance</h1>
+    <a href="{% url 'attendance_create' %}"
+        class="bg-indigo-700 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-indigo-800 transition">
+        + New Session
+    </a>
+</div>
+
+<div class="bg-white rounded-xl shadow overflow-hidden">
+    <table class="w-full text-sm">
+        <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
+            <tr>
+                <th class="px-6 py-3 text-left">Classroom</th>
+                <th class="px-6 py-3 text-left">Date</th>
+                <th class="px-6 py-3 text-left">Actions</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% for attendance in attendances %}
+            <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 font-medium text-gray-800">{{ attendance.classroom.name }}</td>
+                <td class="px-6 py-4 text-gray-500">{{ attendance.date }}</td>
+                <td class="px-6 py-4 flex gap-3">
+                    <a href="{% url 'attendance_detail' attendance.pk %}" class="text-indigo-600 hover:underline">View</a>
+                    <a href="{% url 'attendance_mark' attendance.pk %}" class="text-green-600 hover:underline">Mark</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="3" class="px-6 py-8 text-center text-gray-400">No attendance sessions found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}
